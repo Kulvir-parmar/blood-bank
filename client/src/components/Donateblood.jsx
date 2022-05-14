@@ -1,7 +1,37 @@
+import { useState } from 'react'
 import { Input } from 'reactstrap';
 import './DonateBlood.css'
 
+import Axios from 'axios'
+// import { response } from 'express';
+
 function Donateblood() {
+  const [name, setName] = useState();
+  const [gender, setGender] = useState();
+  const [dob, setDob] = useState();
+  const [mnum, setMnum] = useState();
+  const [adress, setAdress] = useState();
+  const [date, setDate] = useState();
+  const [state, setState] = useState();
+  const [bloodBankName, setBloodBankName] = useState();
+  const [bloodGroup, setBloodGroup] = useState();
+
+  const onSubmitClick = () => {
+     Axios.post('http:localhost:3001/addDonor',{
+       name: name,
+       gender:gender,
+       dob:dob,
+       mnum:mnum,
+       adress:adress,
+       date : date,
+       state:state,
+       bloodBankName:bloodBankName,
+       bloodGroup:bloodGroup
+     }).then(()=>{
+       console.log("sucess");
+     });
+}
+
   return (
     <div className='form'>
       <div className="modal-header">
@@ -13,8 +43,11 @@ function Donateblood() {
             <div className="well">
               <div className="row">
                 <div className="col-12 col-sm-4">
-                  <label for="username" className="control-label">Name<font color="red">*</font></label>
-                  <Input type="text" name="donorFName" maxlength="50" tabindex="1" value="" onkeypress="return validateAlphaOnlyWithDotAndSpace(event)" className="form-control" id="txtBbFName">
+                  <label htmlFor="username" className="control-label">Name<font color="red">*</font></label>
+                  <Input type="text" name="donorName" className="form-control"
+                    onChange={(event) => {
+                      setName(event.target.value);
+                    }}>
                     <div align="center">
                       <div id="enterename" style={{ display: "none" }}>
                         <h4 className="text-danger">Please enter your name</h4>
@@ -23,31 +56,39 @@ function Donateblood() {
                   </Input>
                 </div>
                 <div className=" col-12 col-sm-4">
-                  <label for="Gender" className="control-label">Gender<font color="red">*</font></label>
-                  <select name="donorGender" tabindex="1" className="form-control"><option value="-1">Select Value</option>
+                  <label htmlFor="Gender" className="control-label">Gender<font color="red">*</font></label>
+                  <select name="donorGender" className="form-control" onChange={(event) => {
+                    setGender(event.target.value);
+                  }}>
+                    <option value="-1">Select Value</option>
                     <option value="F">Female</option>
                     <option value="M">Male</option>
-                    <option value="T">Transgender</option></select>
+                    <option value="T">Transgender</option>
+                  </select>
                   <div id="entergender" style={{ display: "none" }}>
                     <h4 className="text-danger">Please enter your gender</h4>
                   </div>
                 </div>
                 <div className="col-12 col-sm-4">
-                  <label for="Age" className="control-label">Date of Birth<font color="red">*</font></label>
-                  <Input className="form-control hasDatepicker" type="text" name="dob" tabindex="0" id="datepicker" placeholder="dd-mm-yyyy" onkeydown="return false" onkeypress="return validateAlphaNumeric(event)">
+                  <label htmlFor="Age" className="control-label">Date of Birth<font color="red">*</font></label>
+                  <Input className="form-control" type="text" name="dob" placeholder="dd-mm-yyyy"
+                    onChange={(event) => {
+                      setDob(event.target.value);
+                    }}>
                     <div id="enterdob" style={{ display: "none" }}>
                       <h4 className="text-danger">Please enter your dob</h4>
                     </div>
                   </Input>
                 </div>
               </div>
-
-
               <div className="row">
 
                 <div className="col-12 col-sm-4">
-                  <label for="Mobile" className="control-label">Mobile Number<font color="red">*</font></label>
-                  <Input type="text" name="donorMobile" maxlength="10" tabindex="1" value="" onkeypress="return validateNumeric(event)" className="form-control" id="txtBbLName">
+                  <label htmlFor="Mobile" className="control-label">Mobile Number<font color="red">*</font></label>
+                  <Input type="text" name="donorMobile" maxLength="10" className="form-control"
+                    onChange={(event) => {
+                      setMnum(event.target.value);
+                    }}>
                     <div id="entermobile" style={{ display: "none" }}>
                       <h4 className="text-danger">Mobile Number is required</h4>
                     </div>
@@ -58,22 +99,31 @@ function Donateblood() {
                   </Input>
                 </div>
                 <div className="col-12 col-sm-4">
-                  <label for="Address" className="control-label">Address</label>
-                  <Input type="text" name="donorAddress" maxlength="150" tabindex="1" value="" onkeypress="return validateAlphaNumeric(event)" className="form-control" id="txtBbLName">
+                  <label htmlFor="Address" className="control-label">Address</label>
+                  <Input type="text" name="donorAddress" maxLength="150" className="form-control" id="txtBbLName"
+                    onChange={(event) => {
+                      setAdress(event.target.value);
+                    }}>
                   </Input>
                 </div>
 
                 <div className=" col-12 col-sm-4">
-                  <label for="password" className="control-label">Tentative Date</label>
-                  <Input className="form-control hasDatepicker" type="text" name="tentdob" id="datepicker1" tabindex="1" placeholder="dd-mm-yyyy" onkeydown="return false">
+                  <label htmlFor="password" className="control-label">Tentative Date</label>
+                  <Input className="form-control hasDatepicker" type="text" name="tentdob" placeholder="dd-mm-yyyy"
+                    onChange={(event) => {
+                      setDate(event.target.value);
+                    }}>
                   </Input>
                 </div>
-
               </div>
               <div className="row">
                 <div className=" col-12 col-sm-4">
-                  <label for="State" className="control-label">State<font color="red">*</font></label>
-                  <select name="donorState" tabindex="1" onchange="loadAddressDistrictList(this.value)" className="form-control"><option value="-1">Select State</option>
+                  <label htmlFor="State" className="control-label">State<font color="red">*</font></label>
+                  <select name="donorState" tabIndex="1" className="form-control"
+                    onChange={(event) => {
+                      setState(event.target.value);
+                    }}>
+                    <option value="-1">Select State</option>
                     <option value="35">Andaman &amp; Nicobar Islands</option>
                     <option value="28">Andhra Pradesh</option>
                     <option value="12">Arunachal Pradesh</option>
@@ -110,35 +160,30 @@ function Donateblood() {
                     <option value="16">Tripura</option>
                     <option value="95">Uttarakhand</option>
                     <option value="99">Uttar Pradesh</option>
-                    <option value="19">West Bengal</option></select>
-
+                    <option value="19">West Bengal</option>
+                  </select>
                   <div id="enterstate" style={{ display: "none" }}>
                     <h4 className="text-danger">Please enter your state</h4>
                   </div>
                 </div>
-                <div className=" col-12 col-sm-4">
-                  <label for="District/City" className="control-label">District/City<font color="red">*</font></label>
-                  <select name="addressDistrict" id="addressDistList" onchange="loadNewBBList(this.value)" tabindex="1" className="form-control">
-                    <option value="-1">Select District</option>
-                  </select>
-                  <div id="enterdistrict" style={{ display: "none" }}>
-                    <h4 className="text-danger">Please enter your district</h4>
-                  </div>
-                </div>
                 <div className="col-12 col-sm-4">
-                  <label for="Pincode" className="control-label">Blood Bank Name<font color="red">*</font></label>
-                  <select tabindex="1" id="bbnamelist" name="bloodBankName" className="form-control">
+                  <label htmlFor="Pincode" className="control-label">Blood Bank Name<font color="red">*</font></label>
+                  <select id="bbnamelist" name="bloodBankName" className="form-control"
+                    onChange={(event) => {
+                      setBloodBankName(event.target.value);
+                    }}>
                     <option value="-1">Select Blood Bank</option>
                   </select>
                   <div id="enterbloodbankname" style={{ display: "none" }}>
                     <h4 className="text-danger">Please enter your blood bank name</h4>
                   </div>
                 </div>
-              </div>
-              <div className="row">
                 <div className="col-12 col-sm-4">
-                  <label for="username" className="control-label">Blood Group</label>
-                  <select tabindex="1" name="bloodgroup" className="form-control">
+                  <label htmlFor="username" className="control-label">Blood Group</label>
+                  <select tabIndex="1" name="bloodgroup" className="form-control"
+                    onChange={(event) => {
+                      setBloodGroup(event.target.value);
+                    }}>
                     <option value="-1">Select Blood Group </option>
                     <option value="1">A+Ve</option>
                     <option value="2">A-Ve</option>
@@ -150,33 +195,17 @@ function Donateblood() {
                     <option value="8">O-Ve</option>
                   </select>
                 </div>
-                <div className=" col-12 col-sm-4">
-                  <label for="Gender" className="control-label">GoI ID</label>
-                  <select tabindex="1" name="goiid" onchange="goiddiv()" className="form-control">
-                    <option value="-1">Select Value</option>
-                    <option value="7#18#3">Aadhar Number</option>
-                    <option value="4#18#2">Driving License</option>
-                    <option value="5#18#2">Govt Authority Identifier</option>
-                    <option value="1#10#2">PAN  </option>
-                    <option value="2#8#2">Passport Number</option>
-                    <option value="3#18#2">Voter Id</option>
-                  </select>
-                </div>
-                <div className=" col-12 col-sm-4" id="goinumber" style={{ display: "none" }}>
-                  <label for="password" className="control-label">GoI ID Number</label>
-                  <Input type="text" name="goinumber" className="form-control" tabindex="1" maxlength="20" placeholder="GoI ID Number">
-                    <div id="entergoi" sstyle={{ display: "none" }}>
-                      <h4 className="text-danger">Please enter your GOI ID number</h4>
-                    </div>
-                  </Input>
-                </div>
               </div>
               <br />
               <div className="row">
                 <div className="col-12 col-sm-4">
                 </div>
                 <div className="col-12 col-sm-4">
-                  <button type="submit" tabindex="1" onclick="signup()" className="btn btn-primary btn-block btn-danger">Save</button>
+                  <button type="submit" tabIndex="1" className="btn btn-primary btn-block btn-danger"
+                    onClick={onSubmitClick }
+                  >
+                    Save
+                  </button>
                 </div>
                 <div className="col-12 col-sm-4">
                 </div>

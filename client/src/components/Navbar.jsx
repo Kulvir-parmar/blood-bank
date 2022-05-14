@@ -28,11 +28,11 @@ function NavbarComponent() {
         <div className="items">
           <Collapse navbar>
             <Nav
-              classNameName="me-auto"
+              className="me-auto"
               navbar >
               <NavItem className="item">
                 <NavLink href="/">
-                  Home
+                  HOME
                 </NavLink>
               </NavItem>
               <NavItem className="item">
