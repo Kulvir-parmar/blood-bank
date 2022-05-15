@@ -17,20 +17,21 @@ function Donateblood() {
   const [bloodGroup, setBloodGroup] = useState();
 
   const onSubmitClick = () => {
-     Axios.post('http:localhost:3001/addDonor',{
-       name: name,
-       gender:gender,
-       dob:dob,
-       mnum:mnum,
-       adress:adress,
-       date : date,
-       state:state,
-       bloodBankName:bloodBankName,
-       bloodGroup:bloodGroup
-     }).then(()=>{
-       console.log("sucess");
-     });
-}
+
+    Axios.post('http:localhost:3001/addDonor', {
+      name: name,
+      gender: gender,
+      //  dob:dob,
+      //  mnum:mnum,
+      //  adress:adress,
+      //  date : date,
+      //  state:state,
+      //  bloodBankName:bloodBankName,
+      //  bloodGroup:bloodGroup
+    }).then((response) => {
+      console.log(response);
+    });
+  }
 
   return (
     <div className='form'>
@@ -202,7 +203,7 @@ function Donateblood() {
                 </div>
                 <div className="col-12 col-sm-4">
                   <button type="submit" tabIndex="1" className="btn btn-primary btn-block btn-danger"
-                    onClick={onSubmitClick }
+                    onClick={onSubmitClick}
                   >
                     Save
                   </button>

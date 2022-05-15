@@ -5,18 +5,21 @@ import './SearchBar.css'
 import Axios from 'axios';
 
 function SearchBar() {
-  const [state, setState] = useState("");
+  const [State, setState] = useState("");
   const [bloodGroup, setBloodGroup] = useState("");
   const [bloodComponent, setBloodComponent] = useState("");
 
   const search = () => {
-    // console.log(state + "  " + bloodGroup + "   " + bloodComponent);
-    Axios.get("http://localhost:3001/bloodData").then((res)=>{
+    Axios.get("http://localhost:3001/bloodData").then((res) => {
       console.log(res);
+    }).then((res) => {
+      console.log(res);
+    }, error => {
+      console.error(error.message);
     });
   }
-  return (
 
+  return (
     <div>
       <div className='heading'>Blood Availability</div>
       <hr className='line' />
@@ -40,7 +43,8 @@ function SearchBar() {
                 <Input
                   bsSize="sm"
                   type="select"
-                  onChange={(event)=>{setState(event.target.value);
+                  onChange={(event) => {
+                    setState(event.target.value);
                   }}
                   style={{
                     margin: 'auto',
@@ -90,7 +94,8 @@ function SearchBar() {
                 <Input
                   bsSize="sm"
                   type="select"
-                  onChange={(event)=>{setBloodGroup(event.target.value);
+                  onChange={(event) => {
+                    setBloodGroup(event.target.value);
                   }}
                   style={{
                     margin: 'auto',
@@ -112,7 +117,8 @@ function SearchBar() {
                 <Input
                   bsSize="sm"
                   type="select"
-                  onChange={(event)=>{setBloodComponent(event.target.value);
+                  onChange={(event) => {
+                    setBloodComponent(event.target.value);
                   }}
                   style={{
                     margin: 'auto',
@@ -143,7 +149,7 @@ function SearchBar() {
           color="danger"
           outline
           onClick={search}
-          >
+        >
           Search
         </Button>
       </div>

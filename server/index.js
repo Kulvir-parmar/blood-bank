@@ -27,14 +27,15 @@ const db = mysql.createConnection({
 app.post("/addDonor",(req,res)=>{
   const name = req.body.name;
   const gender = req.body.gender;
-  const dob = req.body.dob;
-  const mnum = req.body.mnum;
-  const adress = req.body.name;
-  const date = req.body.date;
-  const state = req.body.state;
-  const bloodBankName = req.body.bloodBankName;
-  const bloodGroup = req.body.bloodGroup;
-  console.log(res);
+  // const dob = req.body.dob;
+  // const mnum = req.body.mnum;
+  // const adress = req.body.name;
+  // const date = req.body.date;
+  // const state = req.body.state;
+  // const bloodBankName = req.body.bloodBankName;
+  // const bloodGroup = req.body.bloodGroup;
+  console.log("received");
+  res.send("details received");
 })
 
 app.get("/bloodData",()=>{
