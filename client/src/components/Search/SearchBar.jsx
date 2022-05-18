@@ -10,12 +10,13 @@ function SearchBar() {
   const [bloodComponent, setBloodComponent] = useState("");
 
   const search = () => {
-    Axios.get("http://localhost:3001/bloodData").then((res) => {
-      console.log(res);
+
+    Axios.post("http://localhost:3001/bloodData",{
+      State:State,
+      bloodGroup:bloodGroup,
+      bloodComponent:bloodComponent
     }).then((res) => {
       console.log(res);
-    }, error => {
-      console.error(error.message);
     });
   }
 
@@ -51,43 +52,43 @@ function SearchBar() {
                     color: 'rgba(0,0,0,0.7)'
                   }}>
                   <option value="-1">Select State</option>
-                  <option value="35">Andaman &amp; Nicobar Islands</option>
-                  <option value="28">Andhra Pradesh</option>
-                  <option value="12">Arunachal Pradesh</option>
-                  <option value="18">Assam</option>
-                  <option value="10">Bihar</option>
-                  <option value="94">Chandigarh</option>
-                  <option value="22">Chhattisgarh</option>
-                  <option value="26">Dadra &amp; Nagar Haveli</option>
-                  <option value="25">Daman &amp; Diu</option>
-                  <option value="97">Delhi</option>
-                  <option value="30">Goa</option>
-                  <option value="24">Gujarat</option>
-                  <option value="96">Haryana</option>
-                  <option value="92">Himachal Pradesh</option>
-                  <option value="91">Jammu and Kashmir</option>
-                  <option value="20">Jharkhand</option>
-                  <option value="29">Karnataka</option>
-                  <option value="32">Kerala</option>
-                  <option value="37">Ladakh</option>
-                  <option value="31">Lakshadweep</option>
-                  <option value="23">Madhya Pradesh</option>
-                  <option value="27">Maharashtra</option>
-                  <option value="14">Manipur</option>
-                  <option value="17">Meghalaya</option>
-                  <option value="15">Mizoram</option>
-                  <option value="13">Nagaland</option>
-                  <option value="21">Odisha</option>
-                  <option value="34">Puducherry</option>
-                  <option value="93">Punjab</option>
-                  <option value="98">Rajasthan</option>
-                  <option value="11">Sikkim</option>
-                  <option value="33">Tamil Nadu</option>
-                  <option value="36">Telangana</option>
-                  <option value="16">Tripura</option>
-                  <option value="95">Uttarakhand</option>
-                  <option value="99">Uttar Pradesh</option>
-                  <option value="19">West Bengal</option>
+                  <option value="Andaman &amp; Nicobar Islands">Andaman &amp; Nicobar Islands</option>
+                  <option value="Andhra Pradesh">Andhra Pradesh</option>
+                  <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                  <option value="Assam">Assam</option>
+                  <option value="Bihar">Bihar</option>
+                  <option value="Chandigarh">Chandigarh</option>
+                  <option value="Chhattisgarh">Chhattisgarh</option>
+                  <option value="Dadra &amp; Nagar Haveli">Dadra &amp; Nagar Haveli</option>
+                  <option value="Daman &amp; Diu">Daman &amp; Diu</option>
+                  <option value="Delhi">Delhi</option>
+                  <option value="Goa">Goa</option>
+                  <option value="Gujarat">Gujarat</option>
+                  <option value="Haryana">Haryana</option>
+                  <option value="Himachal Pradesh">Himachal Pradesh</option>
+                  <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                  <option value="Jharkhand">Jharkhand</option>
+                  <option value="Karnataka">Karnataka</option>
+                  <option value="Kerala">Kerala</option>
+                  <option value="Ladakh">Ladakh</option>
+                  <option value="Lakshadweep">Lakshadweep</option>
+                  <option value="Madhya Pradesh">Madhya Pradesh</option>
+                  <option value="Maharashtra">Maharashtra</option>
+                  <option value="Manipur">Manipur</option>
+                  <option value="Meghalaya">Meghalaya</option>
+                  <option value="Mizoram">Mizoram</option>
+                  <option value="Nagaland">Nagaland</option>
+                  <option value="Odisha">Odisha</option>
+                  <option value="Puducherry">Puducherry</option>
+                  <option value="Punjab">Punjab</option>
+                  <option value="Rajasthan">Rajasthan</option>
+                  <option value="Sikkim">Sikkim</option>
+                  <option value="Tamil Nadu">Tamil Nadu</option>
+                  <option value="Telangana">Telangana</option>
+                  <option value="Tripura">Tripura</option>
+                  <option value="Uttarakhand">Uttarakhand</option>
+                  <option value="Uttar Pradesh">Uttar Pradesh</option>
+                  <option value="West Bengal">West Bengal</option>
                 </Input>
               </td>
               <td style={{ width: "23%" }}>
@@ -102,15 +103,15 @@ function SearchBar() {
                     color: 'rgba(0,0,0,0.7)'
                   }}
                 >
-                  <option value="-1">Blood Group</option>
-                  <option value="1">A +ve</option>
-                  <option value="2">A -ve</option>
-                  <option value="3">B +ve</option>
-                  <option value="4">B -ve</option>
-                  <option value="5">O +ve</option>
-                  <option value="6">O -ve</option>
-                  <option value="7">AB +ve</option>
-                  <option value="8">AB -ve</option>
+                  <option value="-1">Select Blood Group </option>
+                  <option value="A+Ve">A+Ve</option>
+                  <option value="A+Ve">A+Ve</option>
+                  <option value="B+Ve">B+Ve</option>
+                  <option value="B-Ve">B-Ve</option>
+                  <option value="AB+Ve">AB+Ve</option>
+                  <option value="AB-Ve">AB-Ve</option>
+                  <option value="O+Ve">O+Ve</option>
+                  <option value="O-Ve">O-Ve</option>
                 </Input>
               </td>
               <td style={{ width: "23%" }}>
@@ -125,20 +126,16 @@ function SearchBar() {
                     color: 'rgba(0,0,0,0.7)'
                   }}>
                   <option value="-1">Select Blood Component</option>
-                  <option value="11">Whole Blood</option>
-                  <option value="14">Single Donor Platelet</option>
-                  <option value="18">Single Donor Plasma</option>
-                  <option value="28">Sagm Packed Red Blood Cells</option>
-                  <option value="16">Platelet Rich Plasma</option>
-                  <option value="15">Platelet Poor Plasma</option>
-                  <option value="20">Platelet Concentrate</option>
-                  <option value="19">Plasma</option>
-                  <option value="12">Packed Red Blood Cells</option>
-                  <option value="30">Leukoreduced Rbc</option>
-                  <option value="29">Irradiated RBC</option>
-                  <option value="13">Fresh Frozen Plasma</option>
-                  <option value="17">Cryoprecipitate</option>
-                  <option value="21">Cryo Poor Plasma</option></Input>
+                  <option value="Whole Blood">Whole Blood</option>
+                  <option value="Single Donor Platelet">Single Donor Platelet</option>
+                  <option value="Single Donor Plasma">Single Donor Plasma</option>
+                  <option value="Sagm Packed Red Blood Cells">Sagm Packed Red Blood Cells</option>
+                  <option value="Platelet Rich Plasma">Platelet Rich Plasma</option>
+                  <option value="Platelet Poor Plasma">Platelet Poor Plasma</option>
+                  <option value="Platelet Concentrate">Platelet Concentrate</option>
+                  <option value="Plasma">Plasma</option>
+                  <option value="Packed Red Blood Cells">Packed Red Blood Cells</option>
+                </Input>
               </td>
             </tr>
           </div>

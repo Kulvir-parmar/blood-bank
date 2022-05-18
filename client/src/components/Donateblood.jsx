@@ -13,30 +13,30 @@ function Donateblood() {
   const [adress, setAdress] = useState();
   const [date, setDate] = useState();
   const [state, setState] = useState();
-  const [bloodBankName, setBloodBankName] = useState();
+  const [disease, setDisease] = useState();
   const [bloodGroup, setBloodGroup] = useState();
 
   const onSubmitClick = () => {
 
-    Axios.post('http:localhost:3001/addDonor', {
+    Axios.post('http://localhost:3001/addDonor',{
       name: name,
       gender: gender,
-      //  dob:dob,
-      //  mnum:mnum,
-      //  adress:adress,
-      //  date : date,
-      //  state:state,
-      //  bloodBankName:bloodBankName,
-      //  bloodGroup:bloodGroup
+      dob: dob,
+      mnum: mnum,
+      adress: adress,
+      date: date,
+      state: state,
+      disease: disease,
+      bloodGroup: bloodGroup
     }).then((response) => {
-      console.log(response);
-    });
+      console.log(response.data);
+    }); 
   }
 
   return (
     <div className='form'>
       <div className="modal-header">
-        <h4 className="modal-title text-danger" id="myModalLabel" style={{ align: "center" }}>Donor Details</h4>
+        <h4 className="modal-title text-danger" style={{ align: "center" }}>Donor Details</h4>
       </div>
       <div className="modal-body">
         <div className="row form-group">
@@ -85,15 +85,15 @@ function Donateblood() {
               <div className="row">
 
                 <div className="col-12 col-sm-4">
-                  <label htmlFor="Mobile" className="control-label">Mobile Number<font color="red">*</font></label>
+                  <label className="control-label">Mobile Number<font color="red">*</font></label>
                   <Input type="text" name="donorMobile" maxLength="10" className="form-control"
                     onChange={(event) => {
                       setMnum(event.target.value);
                     }}>
-                    <div id="entermobile" style={{ display: "none" }}>
+                    <div style={{ display: "none" }}>
                       <h4 className="text-danger">Mobile Number is required</h4>
                     </div>
-                    <div id="dmobileNoTen" sstyle={{ display: "none" }}>
+                    <div style={{ display: "none" }}>
                       <h4 className="text-danger">Mobile Number should be 10 digit</h4>
                     </div>
 
@@ -101,7 +101,7 @@ function Donateblood() {
                 </div>
                 <div className="col-12 col-sm-4">
                   <label htmlFor="Address" className="control-label">Address</label>
-                  <Input type="text" name="donorAddress" maxLength="150" className="form-control" id="txtBbLName"
+                  <Input type="text" name="donorAddress" maxLength="150" className="form-control"
                     onChange={(event) => {
                       setAdress(event.target.value);
                     }}>
@@ -125,55 +125,57 @@ function Donateblood() {
                       setState(event.target.value);
                     }}>
                     <option value="-1">Select State</option>
-                    <option value="35">Andaman &amp; Nicobar Islands</option>
-                    <option value="28">Andhra Pradesh</option>
-                    <option value="12">Arunachal Pradesh</option>
-                    <option value="18">Assam</option>
-                    <option value="10">Bihar</option>
-                    <option value="94">Chandigarh</option>
-                    <option value="22">Chhattisgarh</option>
-                    <option value="26">Dadra &amp; Nagar Haveli</option>
-                    <option value="25">Daman &amp; Diu</option>
-                    <option value="97">Delhi</option>
-                    <option value="30">Goa</option>
-                    <option value="24">Gujarat</option>
-                    <option value="96">Haryana</option>
-                    <option value="92">Himachal Pradesh</option>
-                    <option value="91">Jammu and Kashmir</option>
-                    <option value="20">Jharkhand</option>
-                    <option value="29">Karnataka</option>
-                    <option value="32">Kerala</option>
-                    <option value="37">Ladakh</option>
-                    <option value="31">Lakshadweep</option>
-                    <option value="23">Madhya Pradesh</option>
-                    <option value="27">Maharashtra</option>
-                    <option value="14">Manipur</option>
-                    <option value="17">Meghalaya</option>
-                    <option value="15">Mizoram</option>
-                    <option value="13">Nagaland</option>
-                    <option value="21">Odisha</option>
-                    <option value="34">Puducherry</option>
-                    <option value="93">Punjab</option>
-                    <option value="98">Rajasthan</option>
-                    <option value="11">Sikkim</option>
-                    <option value="33">Tamil Nadu</option>
-                    <option value="36">Telangana</option>
-                    <option value="16">Tripura</option>
-                    <option value="95">Uttarakhand</option>
-                    <option value="99">Uttar Pradesh</option>
-                    <option value="19">West Bengal</option>
+                    <option value="Andaman &amp; Nicobar Islands">Andaman &amp; Nicobar Islands</option>
+                    <option value="Andhra Pradesh">Andhra Pradesh</option>
+                    <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                    <option value="Assam">Assam</option>
+                    <option value="Bihar">Bihar</option>
+                    <option value="Chandigarh">Chandigarh</option>
+                    <option value="Chhattisgarh">Chhattisgarh</option>
+                    <option value="Dadra &amp; Nagar Haveli">Dadra &amp; Nagar Haveli</option>
+                    <option value="Daman &amp; Diu">Daman &amp; Diu</option>
+                    <option value="Delhi">Delhi</option>
+                    <option value="Goa">Goa</option>
+                    <option value="Gujarat">Gujarat</option>
+                    <option value="Haryana">Haryana</option>
+                    <option value="Himachal Pradesh">Himachal Pradesh</option>
+                    <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                    <option value="Jharkhand">Jharkhand</option>
+                    <option value="Karnataka">Karnataka</option>
+                    <option value="Kerala">Kerala</option>
+                    <option value="Ladakh">Ladakh</option>
+                    <option value="Lakshadweep">Lakshadweep</option>
+                    <option value="Madhya Pradesh">Madhya Pradesh</option>
+                    <option value="Maharashtra">Maharashtra</option>
+                    <option value="Manipur">Manipur</option>
+                    <option value="Meghalaya">Meghalaya</option>
+                    <option value="Mizoram">Mizoram</option>
+                    <option value="Nagaland">Nagaland</option>
+                    <option value="Odisha">Odisha</option>
+                    <option value="Puducherry">Puducherry</option>
+                    <option value="Punjab">Punjab</option>
+                    <option value="Rajasthan">Rajasthan</option>
+                    <option value="Sikkim">Sikkim</option>
+                    <option value="Tamil Nadu">Tamil Nadu</option>
+                    <option value="Telangana">Telangana</option>
+                    <option value="Tripura">Tripura</option>
+                    <option value="Uttarakhand">Uttarakhand</option>
+                    <option value="Uttar Pradesh">Uttar Pradesh</option>
+                    <option value="West Bengal">West Bengal</option>
                   </select>
                   <div id="enterstate" style={{ display: "none" }}>
                     <h4 className="text-danger">Please enter your state</h4>
                   </div>
                 </div>
                 <div className="col-12 col-sm-4">
-                  <label htmlFor="Pincode" className="control-label">Blood Bank Name<font color="red">*</font></label>
+                  <label className="control-label">Disease (if any)<font color="red">*</font></label>
                   <select id="bbnamelist" name="bloodBankName" className="form-control"
                     onChange={(event) => {
-                      setBloodBankName(event.target.value);
+                      setDisease(event.target.value);
                     }}>
                     <option value="-1">Select Blood Bank</option>
+                    <option value="1">YES</option>
+                    <option value="0">NO</option>
                   </select>
                   <div id="enterbloodbankname" style={{ display: "none" }}>
                     <h4 className="text-danger">Please enter your blood bank name</h4>
@@ -186,14 +188,14 @@ function Donateblood() {
                       setBloodGroup(event.target.value);
                     }}>
                     <option value="-1">Select Blood Group </option>
-                    <option value="1">A+Ve</option>
-                    <option value="2">A-Ve</option>
-                    <option value="3">B+Ve</option>
-                    <option value="4">B-Ve</option>
-                    <option value="5">AB+Ve</option>
-                    <option value="6">AB-Ve</option>
-                    <option value="7">O+Ve</option>
-                    <option value="8">O-Ve</option>
+                    <option value="A+Ve">A+Ve</option>
+                    <option value="A+Ve">A+Ve</option>
+                    <option value="B+Ve">B+Ve</option>
+                    <option value="B-Ve">B-Ve</option>
+                    <option value="AB+Ve">AB+Ve</option>
+                    <option value="AB-Ve">AB-Ve</option>
+                    <option value="O+Ve">O+Ve</option>
+                    <option value="O-Ve">O-Ve</option>
                   </select>
                 </div>
               </div>
