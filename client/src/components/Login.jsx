@@ -5,7 +5,6 @@ function Login(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loginStatus,setLogin] = useState("");
-
   const login = () => {
     Axios.post("http://localhost:3001/login", {
       username: username,
@@ -13,15 +12,18 @@ function Login(props) {
     })
     .then((response)=>{
         console.log(response)
-        window.location="/";
         if(response.data === '"Wrong Username/Password"'){
           setLogin(response.data);
         } else{
           setLogin(response.data[0])
           localStorage.setItem("auth", true)
+          localStorage.setItem("username", response.data[0].uname)
+          // console.log(response.data)
+          window.location="/";
         }
     });
   }
+  
   // console.log("This is my status"+loginStatus.username);
 
 
@@ -34,7 +36,7 @@ function Login(props) {
               <div className="card-body p-5 text-center">
                 <h3 className="mb-5">Sign in</h3>
                 <div className="form-outline mb-4">
-                  <label className="form-label" htmlFor="typeEmailX-2">Email</label>
+                  <label className="form-label" htmlFor="typeEmailX-2">Username</label>
                   <input type="email" id="typeEmailX-2" className="form-control form-control-lg"
                     onChange={(e) => {
                       setUsername(e.target.value);
