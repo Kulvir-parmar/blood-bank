@@ -17,7 +17,6 @@ function Donateblood() {
   const [bloodGroup, setBloodGroup] = useState();
 
   const onSubmitClick = () => {
-
     Axios.post('http://localhost:3001/addDonor',{
       name: name,
       gender: gender,
@@ -72,7 +71,7 @@ function Donateblood() {
                 </div>
                 <div className="col-12 col-sm-4">
                   <label htmlFor="Age" className="control-label">Date of Birth<font color="red">*</font></label>
-                  <Input className="form-control" type="text" name="dob" placeholder="dd-mm-yyyy"
+                  <Input className="form-control" type="text" name="dob" placeholder="yyyy-mm-dd"
                     onChange={(event) => {
                       setDob(event.target.value);
                     }}>
@@ -110,7 +109,7 @@ function Donateblood() {
 
                 <div className=" col-12 col-sm-4">
                   <label htmlFor="password" className="control-label">Tentative Date</label>
-                  <Input className="form-control hasDatepicker" type="text" name="tentdob" placeholder="dd-mm-yyyy"
+                  <Input className="form-control hasDatepicker" type="text" name="tentdob" placeholder="yyyy-mm-dd"
                     onChange={(event) => {
                       setDate(event.target.value);
                     }}>
@@ -173,9 +172,9 @@ function Donateblood() {
                     onChange={(event) => {
                       setDisease(event.target.value);
                     }}>
-                    <option value="-1">Select Blood Bank</option>
-                    <option value="1">YES</option>
-                    <option value="0">NO</option>
+                    <option value="">Disease (if any)</option>
+                    <option value="Yes">YES</option>
+                    <option value="No">NO</option>
                   </select>
                   <div id="enterbloodbankname" style={{ display: "none" }}>
                     <h4 className="text-danger">Please enter your blood bank name</h4>
@@ -187,7 +186,7 @@ function Donateblood() {
                     onChange={(event) => {
                       setBloodGroup(event.target.value);
                     }}>
-                    <option value="-1">Select Blood Group </option>
+                    <option value="">Select Blood Group </option>
                     <option value="A+Ve">A+Ve</option>
                     <option value="A+Ve">A+Ve</option>
                     <option value="B+Ve">B+Ve</option>

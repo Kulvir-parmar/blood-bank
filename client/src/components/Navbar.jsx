@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import {
   Nav,
   Navbar,
@@ -9,6 +10,9 @@ import {
 } from "reactstrap";
 import './Navbar.css'
 function NavbarComponent() {
+
+  const loggedIn = localStorage.getItem("auth")
+
   return (
     <div className="shadow">
       <Navbar
@@ -35,21 +39,48 @@ function NavbarComponent() {
                   HOME
                 </NavLink>
               </NavItem>
-              <NavItem className="item">
-                <NavLink href="/stockAvailability">
-                  LOOKING FOR BLOOD
-                </NavLink>
-              </NavItem>
-              <NavItem className="item">
-                <NavLink href="/donateBlood">
-                  DONATE BLOOD
-                </NavLink>
-              </NavItem>
-              <NavItem className="item">
-                <NavLink href="/employeeLogin">
-                  BLOODBANK LOGIN
-                </NavLink>
-              </NavItem>
+              {loggedIn ?
+                <Fragment>
+                  <NavItem className="item">
+                    <NavLink href="/bloodStocks">
+                      BLOOD STOCKS
+                    </NavLink>
+                  </NavItem>
+                  <NavItem className="item">
+                    <NavLink href="/donors">
+                      DONORS
+                    </NavLink>
+                  </NavItem>
+                  <NavItem className="item">
+                    <NavLink href="/addBloodBag">
+                      ADD BLOODBAG
+                    </NavLink>
+                  </NavItem>
+                  <NavItem className="item">
+                    <NavLink href="/showEmployees">
+                      EMPLOYEES
+                    </NavLink>
+                  </NavItem>
+                </Fragment>
+                :
+                <Fragment>
+                  <NavItem className="item">
+                    <NavLink href="/stockAvailability">
+                      LOOKING FOR BLOOD
+                    </NavLink>
+                  </NavItem>
+                  <NavItem className="item">
+                    <NavLink href="/donateBlood">
+                      DONATE BLOOD
+                    </NavLink>
+                  </NavItem>
+                  <NavItem className="item">
+                    <NavLink href="/login">
+                      BLOODBANK LOGIN
+                    </NavLink>
+                  </NavItem>
+                </Fragment>}
+
             </Nav>
           </Collapse>
         </div>

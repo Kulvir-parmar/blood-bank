@@ -8,17 +8,39 @@ function SearchBar() {
   const [State, setState] = useState("");
   const [bloodGroup, setBloodGroup] = useState("");
   const [bloodComponent, setBloodComponent] = useState("");
+  const [bloodList, setBloodList] = useState("")
 
   const search = () => {
-
-    Axios.post("http://localhost:3001/bloodData",{
-      State:State,
-      bloodGroup:bloodGroup,
-      bloodComponent:bloodComponent
+    Axios.post("http://localhost:3001/bloodData", {
+      State: State,
+      bloodGroup: bloodGroup,
+      bloodComponent: bloodComponent
     }).then((res) => {
-      console.log(res);
+      setBloodList(res.data);
     });
   }
+
+  const RenderRow = bloodList ? bloodList.map((bloodList) => {
+    return (
+      <tr>
+        <td >
+          {bloodList.bloodbag_id}
+        </td>
+        <td>
+          {bloodList.blood_group}
+        </td>
+        <td>
+          {bloodList.blood_quantity}
+        </td>
+        <td>
+          {bloodList.expire_date}
+        </td>
+      </tr>
+    )
+  }) : []
+
+
+
 
   return (
     <div>
@@ -104,14 +126,14 @@ function SearchBar() {
                   }}
                 >
                   <option value="-1">Select Blood Group </option>
-                  <option value="A+Ve">A+Ve</option>
-                  <option value="A+Ve">A+Ve</option>
-                  <option value="B+Ve">B+Ve</option>
-                  <option value="B-Ve">B-Ve</option>
-                  <option value="AB+Ve">AB+Ve</option>
-                  <option value="AB-Ve">AB-Ve</option>
-                  <option value="O+Ve">O+Ve</option>
-                  <option value="O-Ve">O-Ve</option>
+                  <option value="A+">A+Ve</option>
+                  <option value="A+">A+Ve</option>
+                  <option value="B+">B+Ve</option>
+                  <option value="B-">B-Ve</option>
+                  <option value="AB+">AB+Ve</option>
+                  <option value="AB-">AB-Ve</option>
+                  <option value="O+">O+Ve</option>
+                  <option value="O-">O-Ve</option>
                 </Input>
               </td>
               <td style={{ width: "23%" }}>
@@ -149,6 +171,39 @@ function SearchBar() {
         >
           Search
         </Button>
+      </div>
+
+      <div className='resultsTable'>
+        <Table
+          bordered
+          borderless
+          hover
+          responsive
+          style={{
+            padding: "8px",
+            verticaLAlign: "top",
+          }}
+        >
+          <thead>
+            <tr className='header'>
+              <td >
+                Bag id
+              </td>
+              <td >
+                Blood Group
+              </td>
+              <td >
+                Quantity
+              </td>
+              <td >
+                Expire Date
+              </td>
+            </tr>
+          </thead>
+          <tbody>
+            {RenderRow}
+          </tbody>
+        </Table>
       </div>
     </div >
   )
