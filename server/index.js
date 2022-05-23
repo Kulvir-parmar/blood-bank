@@ -1,7 +1,7 @@
-const express = require('express');
+const express = require('express'); 
 const app = express();
 const mysql = require('mysql');
-const cors = require('cors');
+const cors = require('cors'); 
 const bodyParser = require('body-parser');
 const { response } = require('express');
 app.use(cors());
@@ -119,7 +119,7 @@ app.post("/addDonor", (req, res) => {
   const bloodGroup = req.body.bloodGroup;
 
   db.query(
-    "INSERT INTO donor (donorname,gender,dob,mnum,adress,date,state,bloodGroup,disease)  VALUES(?,?,?,?,?,?,?,?,?)",
+    "INSERT INTO donor (donorname,gender,dob,mnum,adress,date,state,disease,bloodGroup)  VALUES(?,?,?,?,?,?,?,?,?)",
     [name, gender, dob, mnum, adress, date, state, disease, bloodGroup],
     (err) => {
       if (err) {
